@@ -197,15 +197,6 @@ fn receive_response() {
 [^2]: Возьмем JavaScript: `new String("hello world")` -- аллоцирует ли конструктор String-обертки новый буфер под копию строки или же просто берет ссылку на существующий константный литерал? Я не знаю. Нужно смотреть конкретную реализацию. Эта деталь реализации никак не влияет на обозреваемое поведение (кроме производительности)
 
 [^3]: А еще `Borrow<T>` и `Deref<Target = T>`, которые также подходят в этом конкретном случае, и какой из них здесь стоит использовать -- вопрос теоретичеcкий, витающий в областях глубокой корректности и детальности выражения намерений, и немножечко даже религиозный. Например:
-```rust
-use std::path::Path;
-use std::borrow::Borrow;
-
-fn open_file1(path: impl AsRef<Path>) {
-    // Сюда я могу передать &str, &String, String, &Path, PathBuf, &PathBuf, 
-}
-
-fn open_file2(path: impl Borrow<Path>) {
-    // A вот сюда уже String, &String и &str не пройдут 
-}
+`fn open_file1(path: impl AsRef<Path>)` -- Сюда я могу передать `&str`, `&String`, `String`, `&Path`, `PathBuf`, `&PathBuf`. 
+`fn open_file2(path: impl Borrow<Path>)` -- A вот сюда уже `String`, `&String` и `&str` не пройдут. Это Rust, тут нужно чувствовать.
 ```
