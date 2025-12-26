@@ -353,6 +353,48 @@ impl<'a, F: FnMut(&[u8]) + Send> AsyncHandleGuard<'a, F> {
 
 ```
 
+------
+
+- Ну это ж кошмар и ужас, скажет матерый защитник C++ и крабоненавистник.
+
+Да. Ужас. unsafe Rust это страшно. И максимально неудобно.
+
+- Вот у нас в C++ таких проблем нет и деструкторы всегда вызываются.
+
+Вы ошибаетесь. В C++ нам никакая помощь компилятора не нужна, мы можем сделать `ManuallyDrop`-обертку сами.
+
+```C++
+#include <utility>
+#include <new>
+
+template <class T>
+struct ManuallyDrop {
+
+    template<class... Args>
+    ManuallyDrop(Args&&... args) {
+        new (buffer) T (std::forward<Args>(args)... );
+    };
+
+    ManuallyDrop(const ManuallyDrop&) = delete;
+    ManuallyDrop(ManuallyDrop&&) = delete;
+    ManuallyDrop& operator = (ManuallyDrop&&)      = delete;
+    ManuallyDrop& operator = (const ManuallyDrop&) = delete;
+    
+    const T& get() const {
+        return *std::launder(reinterpret_cast<const T*>(buffer));
+    }
+
+    T& get()  {
+        return *std::launder(reinterpret_cast<T*>(buffer));
+    }
+
+private:
+    alignas(T) std::byte  buffer[sizeof(T)];
+};
+```
+
+Просто в С++ нет такой проблемы, потому что в C++ в принципе не выразимы подобные отношения между объектами. Так что разработчикам библиотек не нужно утруждать себя заботой о невызванных деструкторах. Пользователь пусть сам обо всем позаботится.
+
 
 ------
 
