@@ -220,7 +220,7 @@ struct JoinInner<'scope, T> {
 
 ```rust
 
-https://doc.rust-lang.org/src/std/thread/mod.rs.html#1794
+// https://doc.rust-lang.org/src/std/thread/mod.rs.html#1794
 
 impl<'scope, T> Drop for Packet<'scope, T> {
     fn drop(&mut self) {
@@ -245,7 +245,7 @@ impl<'scope, T> Drop for Packet<'scope, T> {
 
 Если заглянуть в async Rust, то можно обнаружить, что проблема в целом идет еще дальше, переходя в проблему cancel safety -- уничтожения *или* забывания объектов `Future` до их завершения:
 
-3. Для async Rust нет корректных, безопасных и не блокирующих реализаций аналогов`std::thread::scope`.
+3. Для async Rust нет **одновременно** корректных, безопасных и не блокирующих реализаций аналогов`std::thread::scope`.
 Например, в [async-scoped](https://crates.io/crates/async-scoped) безопасная версия **блокирует** исполнение, ожидая в цикле. 
 
 > *Unfortunately, since the std::mem::forget method is allowed in safe Rust, the purely asynchronous API here is inherently unsafe.*
