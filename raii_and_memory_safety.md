@@ -317,6 +317,8 @@ impl<'a, F: FnMut(&[u8]) + Send> AsyncHandleGuard<'a, F> {
             panic!("Attempt to violate safety: AsyncHandleGuard wasn't dropped")
         }
 
+        // Необходимо сначала прибить (запинить) объект к новой аллокации,
+        // чтоб не сбежал, а потом уже ссылки на него брать 
         let mut callback = Box::pin(f);
 
         let token = Arc::new(());
@@ -326,6 +328,8 @@ impl<'a, F: FnMut(&[u8]) + Send> AsyncHandleGuard<'a, F> {
         unsafe {
             start_handle_data(
                 h.handle.as_ptr(), Some(Self::handle),
+                // Нельзя так просто достать сырой указатель *F из Pin<Box<F>>.
+                // сначала берется Pin<&mut F>, a потом &mut F
                 (callback.as_mut().get_unchecked_mut() as *mut F).cast::<c_void>(),
             );
         }
