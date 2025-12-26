@@ -110,7 +110,8 @@ impl<'a, F: FnMut(&[u8]) + Send> AsyncHandleGuard<'a, F> {
 
 
 impl MyCHandle {
-    pub fn start<'a, F: FnMut(&[u8])>(&'a mut self, callback: &'a mut F) -> AsyncHandleGuard<'a, F> {
+    pub fn start<'a, F: FnMut(&[u8])>(&'a mut self, callback: &'a mut F) 
+    -> AsyncHandleGuard<'a, F> {
         AsyncHandleGuard::new(
             self, callback
         )
@@ -305,7 +306,7 @@ struct AsyncHandleGuard<'a, F> {
 }
 ```
 
-Изменения деструктора тривиальны -- я из опущу. Я вот с коструктором чуть сложнее
+Изменения деструктора тривиальны -- я их опущу. Я вот с коструктором чуть сложнее
 
 ```rust
 
