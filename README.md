@@ -32,3 +32,4 @@ Rust замечательный язык программирования. Сп�
 3. [Шаманим выход из безвыходного положения](crafting_reference_to_owned.md)
 4. [RAII и безопасность памяти](raii_and_memory_safety.md)
 5. [Ссылочные типы и обобщенные функций](borrowing_in_generic_functions.md)
+6. [In Rust We Trust?](unsafe_is_unsafe.md)
