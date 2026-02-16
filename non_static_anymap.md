@@ -111,14 +111,14 @@ impl<'a> AnyMap<'a> {
         let boxed = self.table.get(&TypeId::of::<E::Owner>())?;
         let any: &(dyn AnyDrop + 'a) = Box::deref(boxed);
          // Safety: E::Owner::Element == E
-        unsafe { (any as *const (dyn AnyDrop + 'a) as *const E).as_ref() }
+        unsafe { (any as *const (dyn AnyDrop + 'a) as *const <E::Owner as Owner>::Element<'a>).as_ref() }
     }
     
     fn get_mut<E: Element<'a>>(&mut self) -> Option<&mut E> {
         let boxed = self.table.get_mut(&TypeId::of::<E::Owner>())?;
         let any: &mut (dyn AnyDrop + 'a) = Box::deref_mut(boxed);
         // Safety: E::Owner::Element == E
-        unsafe { (any as *mut (dyn AnyDrop + 'a) as *mut E).as_mut() }
+        unsafe { (any as *mut (dyn AnyDrop + 'a) as *mut <E::Owner as Owner>::Element<'a>).as_mut() }
     }
 }
 
