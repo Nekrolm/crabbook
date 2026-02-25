@@ -34,3 +34,4 @@ Rust замечательный язык программирования. Сп�
 5. [Ссылочные типы и обобщенные функций](borrowing_in_generic_functions.md)
 6. [In Rust We Trust?](unsafe_is_unsafe.md)
 7. [AnyMap без 'static](non_static_anymap.md)
+8. [Send и Sync](send_and_sync.md)
