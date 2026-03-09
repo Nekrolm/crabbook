@@ -35,3 +35,4 @@ Rust замечательный язык программирования. Сп�
 6. [In Rust We Trust?](unsafe_is_unsafe.md)
 7. [AnyMap без 'static](non_static_anymap.md)
 8. [Send и Sync](send_and_sync.md)
+9. [(Дис)функциональный стиль](consume_and_borrowing.md)
