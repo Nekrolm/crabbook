@@ -37,3 +37,4 @@ Rust замечательный язык программирования. Сп�
 8. [Send и Sync](send_and_sync.md)
 9. [(Дис)функциональный стиль](consume_and_borrowing.md)
 10. [Как понять Pin, Unpin, !Unpin и не сойти с ума](pin.md)
+11. [Вы не хотите реализовывать Drop](you_dont_want_drop.md)
