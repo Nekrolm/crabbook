@@ -40,3 +40,4 @@ Rust замечательный язык программирования. Сп�
 11. [Вы не хотите реализовывать Drop](you_dont_want_drop.md)
 12. [Циклы событий и разделяемое состояние](event_loops_and_shared_state.md)
 13. [Функциональные типажи и поля структур](fn_traits_in_structs.md)
+14. [Бахнет ли impl Trait в аргументах функции?](impl_trait_compilation_blow.md)
