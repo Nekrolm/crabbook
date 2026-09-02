@@ -215,7 +215,7 @@ pub fn process(
 
 ```
 
-И получаем то чего хотели
+И [получаем](https://godbolt.org/z/W473YWWsx) то чего хотели
 
 ```
 .LBB0_4:
