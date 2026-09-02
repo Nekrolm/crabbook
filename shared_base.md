@@ -31,7 +31,7 @@ public:
     // читаем согласно конкретной реализации -- долгая операция даже если в канале пусто
     // может сбросить is_ready
     // возвращает true, если что-то было прочитано
-    virtual bool read(std::function_ref<void(std::span<uint8_t>)> receiver);
+    virtual bool read(std::function_ref<void(std::span<uint8_t>)> receiver) = 0;
 };
 ```
 
